@@ -1,4 +1,4 @@
-Ruby
+Ruby [![Build Status](https://travis-ci.org/mtpereira/ansible-ruby.svg)](https://travis-ci.org/mtpereira/ansible-ruby)
 =========
 
 Installs Ruby from a custom repository. Default values install Ruby 1.9.3 from [Brightbox repository](https://www.brightbox.com/docs/ruby/ubuntu/).
