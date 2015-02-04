@@ -1,0 +1,15 @@
+---
+- name: gems - install bundler
+  gem:
+    name: bundler
+    user_install: no
+    state: present
+
+- name: gems - install additional gems
+  gem:
+    name: "{{ item }}"
+    user_install: no
+    state: present
+  with_items: ruby_gems
+  when: ruby_gems is defined and ruby_gems != []
+

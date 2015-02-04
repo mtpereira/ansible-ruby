@@ -1,0 +1,40 @@
+---
+- hosts: all
+
+  vars_files:
+    - defaults/main.yml
+    - vars/main.yml
+
+  tasks:
+    - include: tasks/main.yml
+
+    - name: test - check repository is installed
+      command: apt-cache policy {{ ruby_package_name }}
+      changed_when: false
+      register: ruby_test_repo_url
+
+    - name: test - check ruby version
+      command: ruby --version
+      changed_when: false
+      register: ruby_test_ruby_version
+
+    - name: test - check gem version
+      command: gem --version
+      changed_when: false
+      register: ruby_test_gem_version
+
+    - name: test - assert repo URL
+      assert:
+        that:
+          - "'{{ ruby_repo_url }} {{ ansible_distribution_release }}/main' in ruby_test_repo_url.stdout"
+
+    - name: test - assert ruby version
+      assert:
+        that:
+          - "'{{ ruby_test_ruby_version_expected }}' in ruby_test_ruby_version.stdout"
+
+    - name: test - assert gem version
+      assert:
+        that:
+          - "'{{ ruby_test_gem_version_expected }}' in ruby_test_gem_version.stdout"
+

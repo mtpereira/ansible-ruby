@@ -1,0 +1,36 @@
+---
+- name: packages - add repository
+  apt_repository:
+    repo: "deb {{ ruby_repo_url }} {{ ansible_distribution_release }} main"
+    state: present
+
+- name: packages - add GPG key
+  apt_key:
+    url: "{{ ruby_repo_key_url | default(omit) }}"
+    keyserver: "{{ ruby_repo_key_server | default(omit) }}"
+    id: "{{ ruby_repo_key_id | default(omit) }}"
+    state: present
+
+- name: packages - install ruby
+  apt:
+    pkg: "{{ ruby_package_name }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+
+- name: packages - install ruby-dev
+  apt:
+    pkg: "{{ ruby_dev_package_name }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+
+- name: package - install additional packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: latest
+  with_items: ruby_additional_packages
+  when: ruby_additional_packages is defined and ruby_additional_packages != []
+

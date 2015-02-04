@@ -1,0 +1,13 @@
+---
+- include: packages.yml
+  sudo: yes
+  tags: ruby_packages
+
+- include: alternatives.yml
+  sudo: yes
+  tags: ruby_alternatives
+
+- include: gems.yml
+  sudo: yes
+  tags: ruby_gems
+
