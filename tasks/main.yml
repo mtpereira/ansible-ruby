@@ -1,4 +1,14 @@
 ---
+- name: main - assert that required variables are defined
+  assert:
+    that:
+      - ruby_package_name != ""
+      - ruby_dev_package_name != ""
+      - ruby_repo_url != ""
+      - ruby_repo_key_url != ""
+      - ruby_alternatives_ruby_path != ""
+      - ruby_gem_alternatives_gem_path != ""
+
 - include: packages.yml
   sudo: yes
   tags: ruby_packages

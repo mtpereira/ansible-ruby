@@ -11,25 +11,26 @@
     id: "{{ ruby_repo_key_id | default(omit) }}"
     state: present
 
+- name: packages - update cache
+  apt:
+    update_cache: yes
+
 - name: packages - install ruby
   apt:
     pkg: "{{ ruby_package_name }}"
-    update_cache: yes
-    cache_valid_time: 3600
+    update_cache: no
     state: latest
 
 - name: packages - install ruby-dev
   apt:
     pkg: "{{ ruby_dev_package_name }}"
-    update_cache: yes
-    cache_valid_time: 3600
+    update_cache: no
     state: latest
 
 - name: package - install additional packages
   apt:
     pkg: "{{ item }}"
-    update_cache: yes
-    cache_valid_time: 3600
+    update_cache: no
     state: latest
   with_items: ruby_additional_packages
   when: ruby_additional_packages is defined and ruby_additional_packages != []
