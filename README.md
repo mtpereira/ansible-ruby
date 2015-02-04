@@ -1,31 +1,37 @@
-Role Name
+Ruby
 =========
 
-A brief description of the role goes here.
+Installs Ruby from a custom repository. Default values install Ruby 1.9.3 from [Brightbox repository](https://www.brightbox.com/docs/ruby/ubuntu/).
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+* `ruby_package_name`: Package name that provides Ruby. Defaults to `ruby1.9.3`.
+* `ruby_dev_package_name`: Package name that provides Ruby development libs. Defaults to `ruby1.9.1-dev`.
+* `ruby_repo_url`: Repository URL for package installation. Defaults to `http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu/`.
+* `ruby_repo_key_url`: GPG key URL for repository validation. Defaults to `http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0xF5DA5F09C3173AA6`.
+* `ruby_repo_key_server`: GPG key server URL for repository validation. Used in conjunction with `ruby_repo_key_id`. If these two variables are defined, do not define `ruby_repo_key_url`.
+* `ruby_repo_key_id`: GPG key ID for repository validation. Used in conjunction with `ruby_repo_key_server`. If these two variables are defined, do not define `ruby_repo_key_url`.
+* `ruby_alternatives_ruby_path`: Ruby's binary path for Debian's Alternatives System. Used for setting the installed Ruby as the system's default.
+* `ruby_alternatives_gem_path`: Gem's binary path for Debian's Alternatives System. Used for setting the installed Gem as the system's default.
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: mtpereira.ruby, ruby_package_name: "ruby2.2", ruby_dev_package_name: "ruby2.2-dev" }
 
 License
 -------
@@ -35,4 +41,8 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Thanks to [Brightbox](https://www.brightbox.com/) for the Ruby packages repository.
+
+[GitHub project page](https://github.com/mtpereira/ansible-ruby)
+
+[Manuel Tiago Pereira](http://mtpereira.github.io)

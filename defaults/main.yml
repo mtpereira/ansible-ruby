@@ -4,6 +4,6 @@ ruby_dev_package_name: ruby1.9.1-dev
 ruby_repo_url: "http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu/"
 ruby_repo_key_url: "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0xF5DA5F09C3173AA6"
 
-ruby_alternatives_path: /usr/bin/ruby1.9.3
-ruby_gem_alternatives_path: /usr/bin/gem1.9.3
+ruby_alternatives_ruby_path: /usr/bin/ruby1.9.3
+ruby_gem_alternatives_gem_path: /usr/bin/gem1.9.3
 

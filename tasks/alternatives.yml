@@ -3,11 +3,11 @@
   alternatives:
     name: ruby
     link: /usr/bin/ruby
-    path: "{{ ruby_alternatives_path }}"
+    path: "{{ ruby_alternatives_ruby_path }}"
 
 - name: alternatives - update gem alternatives
   alternatives:
     name: gem
     link: /usr/bin/gem
-    path: "{{ ruby_gem_alternatives_path }}"
+    path: "{{ ruby_gem_alternatives_gem_path }}"
 
