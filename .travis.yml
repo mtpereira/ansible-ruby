@@ -20,11 +20,11 @@ before_script:
 
 script:
   - ansible-playbook --syntax-check -i inventory test.yml
-  - ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}"
+  - ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_GEM_VERSION_EXPECTED}"
   # Taken from https://servercheck.in/blog/testing-ansible-roles-travis-ci-github
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
-    ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}"
+    ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_GEM_VERSION_EXPECTED}"
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
