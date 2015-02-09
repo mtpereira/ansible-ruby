@@ -31,7 +31,7 @@
     - name: test - assert ruby version
       assert:
         that:
-          - "'{{ ruby_test_ruby_version_expected }}' in ruby_test_ruby_version.stdout"
+          - "'ruby {{ ruby_test_ruby_version_expected }}' in ruby_test_ruby_version.stdout"
 
     - name: test - assert gem version
       assert:
