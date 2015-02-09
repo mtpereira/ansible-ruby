@@ -3,6 +3,10 @@ language: python
 
 python: "2.7"
 
+env:
+  - RUBY_PACKAGE_NAME="ruby1.9.3" RUBY_DEV_PACKAGE_NAME="ruby1.9.1-dev" RUBY_ALTERNATIVES_RUBY_PATH="/usr/bin/ruby1.9.3" RUBY_GEM_ALTERNATIVES_GEM_PATH="/usr/bin/gem1.9.3"
+  - RUBY_PACKAGE_NAME="ruby2.1" RUBY_DEV_PACKAGE_NAME="ruby2.1-dev" RUBY_ALTERNATIVES_RUBY_PATH="/usr/bin/ruby2.1" RUBY_GEM_ALTERNATIVES_GEM_PATH="/usr/bin/gem2.1"
+
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
@@ -16,11 +20,11 @@ before_script:
 
 script:
   - ansible-playbook --syntax-check -i inventory test.yml
-  - ansible-playbook -i inventory test.yml --connection=local --sudo
+  - ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}"
   # Taken from https://servercheck.in/blog/testing-ansible-roles-travis-ci-github
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
-    ansible-playbook -i inventory test.yml --connection=local --sudo
+    ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}"
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
