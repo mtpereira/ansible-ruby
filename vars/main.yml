@@ -1,3 +1,7 @@
 ---
+ruby_alternatives_ruby_path: "/usr/bin/{{ ruby_package_name }}"
+ruby_gem_alternatives_gem_path: "/usr/bin/{{ ruby_package_name | replace('ruby', 'gem') }}"
+
 ruby_test_ruby_version_expected: "1.9.3"
 ruby_test_gem_version_expected: "1.8.23.2"
+
