@@ -19,6 +19,8 @@ Role Variables
 * `ruby_repo_key_id`: GPG key ID for repository validation. Used in conjunction with `ruby_repo_key_server`. If these two variables are defined, do not define `ruby_repo_key_url`.
 * `ruby_alternatives_ruby_path`: Ruby's binary path for Debian's Alternatives System. Used for setting the installed Ruby as the system's default.
 * `ruby_alternatives_gem_path`: Gem's binary path for Debian's Alternatives System. Used for setting the installed Gem as the system's default.
+* `ruby_additional_packages`: List of additional packages to be installed. Defaults to `[]`.
+* `ruby_gems`: List of gems to be installed. Defaults to `[]`.
 
 
 Dependencies
