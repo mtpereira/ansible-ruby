@@ -5,7 +5,7 @@ python: "2.7"
 
 env:
   - RUBY_PACKAGE_NAME="ruby1.9.3" RUBY_DEV_PACKAGE_NAME="ruby1.9.1-dev" RUBY_ALTERNATIVES_RUBY_PATH="/usr/bin/ruby1.9.3" RUBY_GEM_ALTERNATIVES_GEM_PATH="/usr/bin/gem1.9.3" RUBY_TEST_RUBY_VERSION_EXPECTED="1.9.3" RUBY_TEST_GEM_VERSION_EXPECTED="1.8.23.2"
-  - RUBY_PACKAGE_NAME="ruby2.1" RUBY_DEV_PACKAGE_NAME="ruby2.1-dev" RUBY_ALTERNATIVES_RUBY_PATH="/usr/bin/ruby2.1" RUBY_GEM_ALTERNATIVES_GEM_PATH="/usr/bin/gem2.1" RUBY_TEST_RUBY_VERSION_EXPECTED="2.1" RUBY_TEST_GEM_VERSION_EXPECTED="2.2.2"
+  - RUBY_PACKAGE_NAME="ruby2.1" RUBY_DEV_PACKAGE_NAME="ruby2.1-dev" RUBY_ALTERNATIVES_RUBY_PATH="/usr/bin/ruby2.1" RUBY_GEM_ALTERNATIVES_GEM_PATH="/usr/bin/gem2.1" RUBY_TEST_RUBY_VERSION_EXPECTED="2.1" RUBY_TEST_GEM_VERSION_EXPECTED="2.2.5"
 
 before_install:
  - sudo apt-get update -qq
@@ -20,7 +20,7 @@ before_script:
 
 script:
   - ansible-playbook --syntax-check -i inventory test.yml
-  - ansible-playbook -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_GEM_VERSION_EXPECTED}"
+  - ansible-playbook -vv -i inventory test.yml --connection=local --sudo -e "ruby_package_name=${RUBY_PACKAGE_NAME}" -e "ruby_dev_package_name=${RUBY_DEV_PACKAGE_NAME}" -e "ruby_alternatives_ruby_path=${RUBY_ALTERNATIVES_RUBY_PATH}" -e "ruby_gem_alternatives_gem_path=${RUBY_GEM_ALTERNATIVES_GEM_PATH}" -e "ruby_test_ruby_version_expected=${RUBY_TEST_RUBY_VERSION_EXPECTED}" -e "ruby_test_gem_version_expected=${RUBY_TEST_GEM_VERSION_EXPECTED}"
   # Taken from https://servercheck.in/blog/testing-ansible-roles-travis-ci-github
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
