@@ -10,14 +10,14 @@
       - ruby_gem_alternatives_gem_path != ""
 
 - include: packages.yml
-  sudo: yes
+  become: yes
   tags: ruby_packages
 
 - include: alternatives.yml
-  sudo: yes
+  become: yes
   tags: ruby_alternatives
 
 - include: gems.yml
-  sudo: yes
+  become: yes
   tags: ruby_gems
 
